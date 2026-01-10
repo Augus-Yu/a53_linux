@@ -1,0 +1,62 @@
+[
+  {
+    "arguments": [
+      "/opt/hisi-linux/x86-arm/arm-himix200-linux/bin/arm-himix200-linux-gcc",
+      "-Wall",
+      "-fPIC",
+      "-DHI_XXXX",
+      "-O2",
+      "-Wall",
+      "-mcpu=cortex-a53",
+      "-mfloat-abi=softfp",
+      "-mfpu=neon-vfpv4",
+      "-fno-aggressive-loop-optimizations",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-O2",
+      "-fstack-protector-strong",
+      "-fPIC",
+      "-c",
+      "-I/home/ydy/Hi3519AV100_SDK_V2.0.2.0/smp/a53_linux/mpp/component/isp/user/sensor/hi3519av100/ov_6946/../../../../../../../mpp/include",
+      "-I/include",
+      "-I./",
+      "-I/user/3a/include",
+      "-o",
+      "obj/ov6946_cmos.o",
+      "ov6946_cmos.c"
+    ],
+    "directory": "/home/ydy/Hi3519AV100_SDK_V2.0.2.0/smp/a53_linux/mpp/component/isp/user/sensor/hi3519av100/ov_6946",
+    "file": "/home/ydy/Hi3519AV100_SDK_V2.0.2.0/smp/a53_linux/mpp/component/isp/user/sensor/hi3519av100/ov_6946/ov6946_cmos.c",
+    "output": "/home/ydy/Hi3519AV100_SDK_V2.0.2.0/smp/a53_linux/mpp/component/isp/user/sensor/hi3519av100/ov_6946/obj/ov6946_cmos.o"
+  },
+  {
+    "arguments": [
+      "/opt/hisi-linux/x86-arm/arm-himix200-linux/bin/arm-himix200-linux-gcc",
+      "-Wall",
+      "-fPIC",
+      "-DHI_XXXX",
+      "-O2",
+      "-Wall",
+      "-mcpu=cortex-a53",
+      "-mfloat-abi=softfp",
+      "-mfpu=neon-vfpv4",
+      "-fno-aggressive-loop-optimizations",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-O2",
+      "-fstack-protector-strong",
+      "-fPIC",
+      "-c",
+      "-I/home/ydy/Hi3519AV100_SDK_V2.0.2.0/smp/a53_linux/mpp/component/isp/user/sensor/hi3519av100/ov_6946/../../../../../../../mpp/include",
+      "-I/include",
+      "-I./",
+      "-I/user/3a/include",
+      "-o",
+      "obj/ov6946_sensor_ctl.o",
+      "ov6946_sensor_ctl.c"
+    ],
+    "directory": "/home/ydy/Hi3519AV100_SDK_V2.0.2.0/smp/a53_linux/mpp/component/isp/user/sensor/hi3519av100/ov_6946",
+    "file": "/home/ydy/Hi3519AV100_SDK_V2.0.2.0/smp/a53_linux/mpp/component/isp/user/sensor/hi3519av100/ov_6946/ov6946_sensor_ctl.c",
+    "output": "/home/ydy/Hi3519AV100_SDK_V2.0.2.0/smp/a53_linux/mpp/component/isp/user/sensor/hi3519av100/ov_6946/obj/ov6946_sensor_ctl.o"
+  }
+]
