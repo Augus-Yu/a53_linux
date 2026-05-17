@@ -19,8 +19,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef I2C_THCV241A_H
-#define I2C_THCV241A_H
+#ifndef VEYE_VBYONE_H
+#define VEYE_VBYONE_H
 
 #include <linux/i2c.h>
 
@@ -85,4 +85,4 @@ struct thcv242a_priv {
     
 };
 
-#endif /* I2C_DS90UB954_H */
+#endif /* VEYE_VBYONE_H */

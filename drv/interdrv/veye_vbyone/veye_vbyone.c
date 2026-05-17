@@ -136,25 +136,52 @@ void print_regmap_info(struct regmap *regmap) {
 static int thcv242a_init_pre(struct thcv242a_priv *priv)
 {
     int err = 0;
+    int ret;
     //unsigned int val;
     struct device *dev = &priv->client->dev; 
     dev_info(dev, "%s: begin \n", __func__);
     
     printk("[%s:%d]i2c_address:0x%x\n",__FUNCTION__,__LINE__,priv->ser[0]->i2c_address);
 
-    err |= thcv242a_write(priv,R_2WIREPT1_PASS_ADRIN0,priv->ser[0]->i2c_address);
-    err |= thcv242a_write(priv, 0x0004, 0x03);
-    err |= thcv242a_write(priv, 0x0010, 0x10);
-    err |= thcv242a_write(priv, 0x1704, 0x01);
-    err |= thcv242a_write(priv, 0x0102, 0x02);
-    err |= thcv242a_write(priv, 0x0103, 0x02);
-    err |= thcv242a_write(priv, 0x0104, 0x00);
-    err |= thcv242a_write(priv, 0x0105, 0x00);
-    err |= thcv242a_write(priv, 0x0100, 0x03);
-    err |= thcv242a_write(priv, 0x010F, 0x25);
-    err |= thcv242a_write(priv, 0x010A, 0x15);
-    err |= thcv242a_write(priv, 0x0031, 0x02);
-    err |= thcv242a_write(priv, R_2WIREPT_WA_DATA_BYTE, 0x10);
+    ret = thcv242a_write(priv,R_2WIREPT1_PASS_ADRIN0,priv->ser[0]->i2c_address);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x0004, 0x03);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x0010, 0x10);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1704, 0x01);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x0102, 0x02);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x0103, 0x02);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x0104, 0x00);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x0105, 0x00);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x0100, 0x03);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x010F, 0x25);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x010A, 0x15);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x0031, 0x02);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, R_2WIREPT_WA_DATA_BYTE, 0x10);
+    if (ret)
+    	err = ret;
     dev_info(dev, "%s:  successfully \n", __func__);
     
     //err |= thcv242a_read(priv,0x010A, &val);
@@ -170,6 +197,7 @@ static int thcv241a_regmap_update(struct thcv242a_priv *priv, int ser_nr);
 static int thcv241a_init(struct thcv242a_priv *despriv,struct thcv241a_priv *serpriv)
 {
     int err = 0;
+    int ret;
     //unsigned int val = 0;
 
     struct device *dev = &despriv->client->dev;
@@ -178,44 +206,110 @@ static int thcv241a_init(struct thcv242a_priv *despriv,struct thcv241a_priv *ser
 
     //err |= thcv242a_write(despriv,R_2WIREPT_WA_DATA_BYTE, 0x10);
 
-    err |= thcv241a_write(serpriv,0x00FE, 0x11);
+    ret = thcv241a_write(serpriv,0x00FE, 0x11);
+    if (ret)
+    	err = ret;
       
     
-    err |= thcv242a_write(despriv,R_2WIREPT_WA_DATA_BYTE, 0x00);
+    ret = thcv242a_write(despriv,R_2WIREPT_WA_DATA_BYTE, 0x00);
+    if (ret)
+    	err = ret;
     //change to 8bit add and 8bit val
-    err |= thcv241a_regmap_update(despriv,0);
+    ret = thcv241a_regmap_update(despriv,0);
+    if (ret)
+    	err = ret;
     dev_info(dev, "%s: change 241 addr to 8bit addr \n", __func__);
     
-    err |= thcv241a_write(serpriv, 0xF3, 0x00);
-    err |= thcv241a_write(serpriv, 0xF2, 0x22);
-    err |= thcv241a_write(serpriv, 0xF0, 0x03);
-    err |= thcv241a_write(serpriv, 0xFF, 0x19);
-    err |= thcv241a_write(serpriv, 0xF6, 0x15);
-    err |= thcv241a_write(serpriv, 0xC9, 0x05);
-    err |= thcv241a_write(serpriv, 0xCA, 0x05);
-    err |= thcv241a_write(serpriv, 0xFE, 0x21);
-    err |= thcv241a_write(serpriv, 0x76, 0x10);
-    err |= thcv241a_write(serpriv, 0x0F, 0x01);
-    err |= thcv241a_write(serpriv, 0x11, 0x1C);
-    err |= thcv241a_write(serpriv, 0x12, 0x6C);
-    err |= thcv241a_write(serpriv, 0x13, 0x80);
-    err |= thcv241a_write(serpriv, 0x14, 0x00);
-    err |= thcv241a_write(serpriv, 0x15, 0x77);
-    err |= thcv241a_write(serpriv, 0x16, 0x01);
-    err |= thcv241a_write(serpriv, 0x00, 0x00);
-    err |= thcv241a_write(serpriv, 0x01, 0x00);
-    err |= thcv241a_write(serpriv, 0x02, 0x00);
-    err |= thcv241a_write(serpriv, 0x55, 0x00);
-    err |= thcv241a_write(serpriv, 0x04, 0x00);
-    err |= thcv241a_write(serpriv, 0x2B, 0x05);
-    err |= thcv241a_write(serpriv, 0x2F, 0x00);
-    err |= thcv241a_write(serpriv, 0x2D, 0x10);
-    err |= thcv241a_write(serpriv, 0x2C, 0x01);
-    err |= thcv241a_write(serpriv, 0x05, 0x01);
-    err |= thcv241a_write(serpriv, 0x06, 0x01);
-    err |= thcv241a_write(serpriv, 0x27, 0x00);
-    err |= thcv241a_write(serpriv, 0x1D, 0x00);
-    err |= thcv241a_write(serpriv, 0x1E, 0x00);
+    ret = thcv241a_write(serpriv, 0xF3, 0x00);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0xF2, 0x22);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0xF0, 0x03);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0xFF, 0x19);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0xF6, 0x15);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0xC9, 0x05);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0xCA, 0x05);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0xFE, 0x21);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x76, 0x10);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x0F, 0x01);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x11, 0x1C);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x12, 0x6C);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x13, 0x80);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x14, 0x00);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x15, 0x77);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x16, 0x01);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x00, 0x00);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x01, 0x00);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x02, 0x00);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x55, 0x00);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x04, 0x00);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x2B, 0x05);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x2F, 0x00);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x2D, 0x10);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x2C, 0x01);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x05, 0x01);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x06, 0x01);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x27, 0x00);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x1D, 0x00);
+    if (ret)
+    	err = ret;
+    ret = thcv241a_write(serpriv, 0x1E, 0x00);
+    if (ret)
+    	err = ret;
     
     dev_info(dev, "%s:  successfully \n", __func__);
     
@@ -227,47 +321,116 @@ static int thcv241a_init(struct thcv242a_priv *despriv,struct thcv241a_priv *ser
 static int thcv242a_init_post(struct thcv242a_priv *priv)
 {
     int err = 0;
+    int ret;
 
     struct device *dev = &priv->client->dev;
     dev_info(dev, "%s: begin \n", __func__);
 
 
-    err |= thcv242a_write(priv, 0x0010, 0x11);
-    err |= thcv242a_write(priv, 0x1010, 0xA1);
-    err |= thcv242a_write(priv, 0x1011, 0x06);
-    err |= thcv242a_write(priv, 0x1012, 0x00);
-    err |= thcv242a_write(priv, 0x1021, 0x60);
-    err |= thcv242a_write(priv, 0x1022, 0x01);
-    err |= thcv242a_write(priv, 0x1023, 0x31);
-    err |= thcv242a_write(priv, 0x1024, 0x00);
-    err |= thcv242a_write(priv, 0x1025, 0x00);
-    err |= thcv242a_write(priv, 0x1026, 0x00);
-    err |= thcv242a_write(priv, 0x1027, 0x07);
-    err |= thcv242a_write(priv, 0x1028, 0x03);
-    err |= thcv242a_write(priv, 0x1030, 0x00);
-    err |= thcv242a_write(priv, 0x1100, 0x01);
-    err |= thcv242a_write(priv, 0x1101, 0x01);
-    err |= thcv242a_write(priv, 0x1102, 0x01);
-    err |= thcv242a_write(priv, 0x1600, 0x1A);
-    err |= thcv242a_write(priv, 0x1605, 0x28);
-    err |= thcv242a_write(priv, 0x1606, 0x44);
-    err |= thcv242a_write(priv, 0x161F, 0x00);
-    err |= thcv242a_write(priv, 0x1609, 0x03);
-    err |= thcv242a_write(priv, 0x160A, 0x07);
-    err |= thcv242a_write(priv, 0x160B, 0x05);
-    err |= thcv242a_write(priv, 0x160D, 0x08);
-    err |= thcv242a_write(priv, 0x160E, 0x00);
-    err |= thcv242a_write(priv, 0x160F, 0x02);
-    err |= thcv242a_write(priv, 0x1610, 0x02);
-    err |= thcv242a_write(priv, 0x1611, 0x01);
-    err |= thcv242a_write(priv, 0x1612, 0x05);
-    err |= thcv242a_write(priv, 0x1703, 0x01);
-    err |= thcv242a_write(priv, 0x1704, 0x11);
+    ret = thcv242a_write(priv, 0x0010, 0x11);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1010, 0xA1);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1011, 0x06);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1012, 0x00);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1021, 0x60);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1022, 0x01);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1023, 0x31);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1024, 0x00);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1025, 0x00);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1026, 0x00);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1027, 0x07);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1028, 0x03);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1030, 0x00);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1100, 0x01);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1101, 0x01);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1102, 0x01);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1600, 0x1A);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1605, 0x28);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1606, 0x44);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x161F, 0x00);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1609, 0x03);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x160A, 0x07);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x160B, 0x05);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x160D, 0x08);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x160E, 0x00);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x160F, 0x02);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1610, 0x02);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1611, 0x01);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1612, 0x05);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1703, 0x01);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv, 0x1704, 0x11);
+    if (ret)
+    	err = ret;
 
     //err |= thcv242a_write(priv,0x001B,0x18);
-    err |= thcv242a_write(priv,R_2WIREPT_WA_DATA_BYTE,0x10);
-    err |= thcv242a_write(priv,R_2WIREPT1_PASS_ADR000,priv->cam_i2c_address);
-    err |= thcv242a_write(priv,R_2WIREPT1_PASS_ADR001,priv->cam_i2c_address);
+    ret = thcv242a_write(priv,R_2WIREPT_WA_DATA_BYTE,0x10);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv,R_2WIREPT1_PASS_ADR000,priv->cam_i2c_address);
+    if (ret)
+    	err = ret;
+    ret = thcv242a_write(priv,R_2WIREPT1_PASS_ADR001,priv->cam_i2c_address);
+    if (ret)
+    	err = ret;
     
     printk("[%s:%d]cam_i2c_address:0x%x\n",__FUNCTION__,__LINE__,priv->cam_i2c_address);
     dev_info(dev, "%s:  successfully \n", __func__);
@@ -397,11 +560,11 @@ static int thcv241a_regmap_init(struct thcv242a_priv *priv, int ser_nr)
 	struct device *dev = &priv->client->dev;
 	int err = 0;
 
-	/* setup now regmap */
+	/* setup new regmap */
 	new_regmap = devm_regmap_init_i2c(priv->ser[ser_nr]->client,
 					  &thcv241a_regmap_config_orig);
-	if(IS_ERR_VALUE(priv->regmap)) {
-		err = PTR_ERR(priv->regmap);
+	if(IS_ERR_VALUE(new_regmap)) {
+		err = PTR_ERR(new_regmap);
 		dev_err(dev, "regmap init of subdevice failed (%d)\n", err);
 		return err;
 	}
@@ -417,15 +580,12 @@ static int thcv241a_regmap_update(struct thcv242a_priv *priv, int ser_nr)
     struct regmap *new_regmap = NULL;
 	struct device *dev = &priv->client->dev;
 	int err = 0;
-    
-    if(priv->ser[ser_nr]->regmap){
-        regmap_exit(priv->ser[ser_nr]->regmap);
-    }
-	/* setup now regmap */
+
+	/* setup new regmap (old devm-managed regmap is auto-freed on device detach) */
 	new_regmap = devm_regmap_init_i2c(priv->ser[ser_nr]->client,
 					  &thcv241a_regmap_config);
-	if(IS_ERR_VALUE(priv->regmap)) {
-		err = PTR_ERR(priv->regmap);
+	if(IS_ERR_VALUE(new_regmap)) {
+		err = PTR_ERR(new_regmap);
 		dev_err(dev, "regmap init of subdevice failed (%d)\n", err);
 		return err;
 	}
@@ -440,7 +600,7 @@ static int thcv241a_alloc(struct thcv242a_priv *priv, int ser_nr)
 	struct device *dev = &priv->client->dev;
 
 	priv_ser = devm_kzalloc(dev, sizeof(struct thcv241a_priv), GFP_KERNEL);
-	if(!priv)
+	if(!priv_ser)
 		return -ENOMEM;
 
 	priv->ser[ser_nr] = priv_ser;
@@ -457,9 +617,6 @@ static int thcv241a_i2c_client(struct thcv242a_priv *priv, int ser_nr,
 	struct i2c_board_info *ser_board_info;
 	ser_board_info = devm_kzalloc(dev, sizeof(struct i2c_board_info), GFP_KERNEL);
 	ser_board_info->addr = addr;
-    msleep(10);
-    printk("[%s:%d],name:%s,dev_name:%s,ser_board_info->addr:0x%x\n",__FUNCTION__,__LINE__,priv->client->adapter->dev.bus->name,priv->client->adapter->dev.bus->dev_name,ser_board_info->addr);
-	msleep(10);
     new_client = i2c_new_device(priv->client->adapter,ser_board_info);
 
 	if(!new_client) {
@@ -608,44 +765,47 @@ static int thcv242a_probe(struct i2c_client *client,
 		goto err_regmap;
 	}
 
-	thcv241a_parse_dt(client, priv);
+	err = thcv241a_parse_dt(client, priv);
+	if(unlikely(err < 0)) {
+		dev_err(dev, "%s: error parsing serializer device tree\n", __func__);
+		goto err_parse_ser;
+	}
 
 	/* turn on deserializer */
 	thcv242a_pwr_enable(priv);
-
-	//msleep(6); // wait for sensor to start
 
 	/* init deserializer */
 	err = thcv242a_init_pre(priv);
 	if(unlikely(err)) {
 		dev_err(dev, "%s: error initializing thcv242a pre\n", __func__);
-		goto err_regmap;
+		goto err_init_pre;
 	}
-    msleep(6);
-    /*init serializer*/
-    err = thcv241a_init(priv,priv->ser[0]);
-
+	msleep(6);
+	/*init serializer*/
+	err = thcv241a_init(priv, priv->ser[0]);
 	if(unlikely(err)) {
 		dev_err(dev, "%s: error initializing thcv242a\n", __func__);
-		goto err_regmap;
+		goto err_init_pre;
 	}
-    msleep(6);
+	msleep(6);
 	/* init deserializer */
 	err = thcv242a_init_post(priv);
 	if(unlikely(err)) {
 		dev_err(dev, "%s: error initializing thcv242a post\n", __func__);
-		goto err_regmap;
+		goto err_init_pre;
 	}
 
 	return 0;
 
-err_regmap:
-	thcv241a_free(priv);
+err_init_pre:
 	thcv242a_pwr_disable(priv);
 	thcv242a_free_gpio(priv);
+	if(priv->ser[0])
+		thcv241a_free(priv);
+err_parse_ser:
+err_regmap:
 err_init_gpio:
 err_parse_dt:
-	devm_kfree(dev, priv);
 	return err;
 }
 

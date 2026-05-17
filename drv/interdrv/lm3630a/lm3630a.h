@@ -1,10 +1,7 @@
 /*
- * lm3630a.c - Thine lm3630a deserializer and THCV241A serializer driver
+ * lm3630a.c - TI LM3630A backlight LED driver
  *
  * Copyright (c) 2023, www.veye.cc, TIANJIN DATA IMAGING TECHNOLOGY CO.,LTD
- *
- * This program is for the lm3630a V-by-ONE deserializer in connection
- * with the SHA241 serializer from Thine
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -24,7 +21,6 @@
 
 #include <linux/i2c.h>
 
-
 /*------------------------------------------------------------------------------
  * DEFINES
  *----------------------------------------------------------------------------*/
@@ -32,7 +28,6 @@
 struct lm3630a_priv {
 	struct i2c_client *client;
 	struct regmap *regmap;
-    
 };
 
-#endif /* I2C_DS90UB954_H */
+#endif /* I2C_LM3630A_H */
